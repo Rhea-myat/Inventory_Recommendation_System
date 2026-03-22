@@ -1,0 +1,22 @@
+ProductName,risk_score,risk_level,risk_drivers
+Samsung MZ-V6P2T0BW,0.47480435678120614,Medium,"High forecasted demand, Low availability proxy"
+PNY SSD9SC240GMDA-RB,0.4079172060321639,Medium,"Low availability proxy, Operational issues"
+Hitachi HUA723020ALA640,0.3796950518961567,Low,High forecasted demand
+Corsair Dominator Platinum,0.7615141961358505,High,"High forecasted demand, Low availability proxy"
+Crucial CT525MX300SSD1,0.5872674297635339,Medium,High forecasted demand
+ASRock C2750D4I,0.136734693877551,Low,No major risk drivers
+ASRock X99 Extreme11,0.2037028890771494,Low,No major risk drivers
+Intel DG43RK,0.28480638555107324,Low,Low availability proxy
+Asus ROG STRIX X99 GAMING,0.3154624441365947,Low,Low availability proxy
+Supermicro MBD-X10DAX,0.32985822758310146,Low,High forecasted demand
+Asus X99-E-10G WS,0.4534946236559139,Medium,High forecasted demand
+Intel Xeon E5-2695 V3 (OEM/Tray),0.3211529486581678,Low,Low availability proxy
+Intel Xeon E5-2683 V4,0.5459418216537099,Medium,"High forecasted demand, Low availability proxy"
+Intel Xeon E5-2643 V3 (OEM/Tray),0.3388523085253222,Low,Low availability proxy
+Intel Xeon E5-2660 V4,0.3933036829516156,Low,High forecasted demand
+Intel Xeon E5-2650 V3 (OEM/Tray),0.46456937066017956,Medium,High forecasted demand
+Intel Core i7-5960X (OEM/Tray),0.42126696832579186,Medium,High forecasted demand
+Asus ROG-POSEIDON-GTX1080TI-P11G-GAMING,0.7691631552859116,High,"High forecasted demand, Low availability proxy, Unstable demand, Operational issues"
+ATI FirePro R5000,0.6540678373879668,Medium,"High forecasted demand, Low availability proxy"
+EVGA 11G-P4-6696-KR,0.6385964912280702,Medium,"High forecasted demand, Low availability proxy"
+MSI GTX 1080 TI LIGHTNING Z,0.6912633639225298,Medium,"High forecasted demand, Low availability proxy, Operational issues"

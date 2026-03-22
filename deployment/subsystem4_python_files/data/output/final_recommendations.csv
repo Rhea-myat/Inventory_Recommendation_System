@@ -1,0 +1,22 @@
+CategoryName,ProductName,base_reorder_qty,social_trend_score,risk_score,fusion_adjustment,final_recommended_qty,probability_up,growth_signal,risk_level,risk_drivers,topic_keyword_text
+Video Card,Asus ROG-POSEIDON-GTX1080TI-P11G-GAMING,115,0.0,0.7691631552859116,0.15383263105718234,133,0.7663604660831513,1,High,"High forecasted demand, Low availability proxy, Unstable demand, Operational issues",
+Video Card,ATI FirePro R5000,90,0.0,0.6540678373879668,0.13081356747759337,102,0.7663604660831513,1,Medium,"High forecasted demand, Low availability proxy",
+CPU,Intel Xeon E5-2695 V3 (OEM/Tray),43,10.366666666666664,0.3211529486581678,1.0,86,0.8044147150166374,1,Low,Low availability proxy,cpu 13 corsair intel rt intel13 z790 300 intel13thgen 12
+CPU,Intel Xeon E5-2683 V4,42,10.366666666666664,0.5459418216537099,1.0,84,0.8044147150166374,1,Medium,"High forecasted demand, Low availability proxy",cpu 13 corsair intel rt intel13 z790 300 intel13thgen 12
+CPU,Intel Xeon E5-2643 V3 (OEM/Tray),40,10.366666666666664,0.3388523085253222,1.0,80,0.8044147150166374,1,Low,Low availability proxy,cpu 13 corsair intel rt intel13 z790 300 intel13thgen 12
+CPU,Intel Xeon E5-2660 V4,34,10.366666666666664,0.3933036829516156,1.0,68,0.8044147150166374,1,Low,High forecasted demand,cpu 13 corsair intel rt intel13 z790 300 intel13thgen 12
+CPU,Intel Xeon E5-2650 V3 (OEM/Tray),30,10.366666666666664,0.4645693706601795,1.0,60,0.8044147150166374,1,Medium,High forecasted demand,cpu 13 corsair intel rt intel13 z790 300 intel13thgen 12
+Storage,Samsung MZ-V6P2T0BW,50,0.0,0.4748043567812061,0.09496087135624122,55,0.8485931215836602,1,Medium,"High forecasted demand, Low availability proxy",
+Storage,PNY SSD9SC240GMDA-RB,42,0.0,0.4079172060321639,0.0815834412064328,45,0.8485931215836602,1,Medium,"Low availability proxy, Operational issues",
+Video Card,EVGA 11G-P4-6696-KR,36,0.0,0.6385964912280702,0.12771929824561404,41,0.7663604660831513,1,Medium,"High forecasted demand, Low availability proxy",
+Storage,Hitachi HUA723020ALA640,36,0.0,0.3796950518961567,0.07593901037923134,39,0.8485931215836602,1,Low,High forecasted demand,
+Mother Board,ASRock C2750D4I,30,0.95,0.136734693877551,0.3123469387755102,39,0.8461905844634453,1,Low,No major risk drivers,asus z790 tuf gaming d4 wifi plus intel rog ddr4
+Storage,Corsair Dominator Platinum,28,0.0,0.7615141961358505,0.1523028392271701,32,0.8485931215836602,1,High,"High forecasted demand, Low availability proxy",
+Video Card,MSI GTX 1080 TI LIGHTNING Z,25,0.0,0.6912633639225298,0.13825267278450598,28,0.7663604660831513,1,Medium,"High forecasted demand, Low availability proxy, Operational issues",
+Mother Board,ASRock X99 Extreme11,20,0.95,0.2037028890771494,0.32574057781542987,27,0.8461905844634453,1,Low,No major risk drivers,asus z790 tuf gaming d4 wifi plus intel rog ddr4
+CPU,Intel Core i7-5960X (OEM/Tray),13,10.366666666666664,0.4212669683257918,1.0,26,0.8044147150166374,1,Medium,High forecasted demand,cpu 13 corsair intel rt intel13 z790 300 intel13thgen 12
+Mother Board,Intel DG43RK,17,0.95,0.2848063855510732,0.3419612771102146,23,0.8461905844634453,1,Low,Low availability proxy,asus z790 tuf gaming d4 wifi plus intel rog ddr4
+Mother Board,Asus ROG STRIX X99 GAMING,16,0.95,0.3154624441365947,0.3480924888273189,22,0.8461905844634453,1,Low,Low availability proxy,asus z790 tuf gaming d4 wifi plus intel rog ddr4
+Mother Board,Supermicro MBD-X10DAX,15,0.95,0.3298582275831014,0.35097164551662025,20,0.8461905844634453,1,Low,High forecasted demand,asus z790 tuf gaming d4 wifi plus intel rog ddr4
+Storage,Crucial CT525MX300SSD1,15,0.0,0.5872674297635339,0.11745348595270677,17,0.8485931215836602,1,Medium,High forecasted demand,
+Mother Board,Asus X99-E-10G WS,12,0.95,0.4534946236559139,0.37569892473118277,17,0.8461905844634453,1,Medium,High forecasted demand,asus z790 tuf gaming d4 wifi plus intel rog ddr4

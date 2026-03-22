@@ -1,0 +1,402 @@
+OrderDate,ProductName,CategoryName,OrderItemQuantity,Status
+2016-11-17,Intel Xeon E5-2699 V3 (OEM/Tray),CPU,132,Shipped
+2017-02-20,Intel Xeon E5-2697 V3,CPU,124,Shipped
+2017-01-03,Intel Xeon E5-2698 V3 (OEM/Tray),CPU,92,Canceled
+2017-10-15,Intel Xeon E5-2697 V4,CPU,128,Pending
+2017-04-09,Intel Xeon E5-2685 V3 (OEM/Tray),CPU,106,Shipped
+2017-08-15,Intel Xeon E5-2695 V3 (OEM/Tray),CPU,148,Shipped
+2016-12-01,Intel Xeon E5-2697 V2,CPU,127,Canceled
+2015-04-09,Intel Xeon E5-2695 V4,CPU,138,Shipped
+2017-05-11,Intel Xeon E5-2695 V2,CPU,117,Canceled
+2016-12-03,Intel Xeon E5-2643 V2 (OEM/Tray),CPU,34,Pending
+2016-12-20,Intel Xeon E5-2690 (OEM/Tray),CPU,58,Shipped
+2016-08-16,Intel Xeon E5-2687W V3,CPU,49,Pending
+2015-05-02,Intel Xeon E5-2687W V4,CPU,77,Shipped
+2016-09-29,Intel Xeon E5-2667 V3 (OEM/Tray),CPU,141,Shipped
+2016-12-13,Intel Xeon E5-2690 V4,CPU,33,Canceled
+2016-12-02,Intel Xeon E5-2690 V3,CPU,144,Shipped
+2016-10-27,Intel Xeon E5-2470V2,CPU,149,Shipped
+2017-10-27,Intel Xeon E5-2683 V4,CPU,145,Shipped
+2016-12-14,Intel Xeon E5-2637 V2 (OEM/Tray),CPU,79,Canceled
+2016-12-13,Intel Xeon E5-2683 V4 (OEM/Tray),CPU,75,Pending
+2015-04-26,Intel Core i7-4960X Extreme Edition,CPU,116,Shipped
+2017-04-26,Intel Xeon E5-2699 V4 (OEM/Tray),CPU,119,Shipped
+2015-04-09,Intel Xeon E5-1680 V3 (OEM/Tray),CPU,148,Shipped
+2017-02-15,Intel Xeon E5-2643 V4 (OEM/Tray),CPU,111,Shipped
+2017-02-14,Intel Core i7-6950X (OEM/Tray),CPU,111,Pending
+2017-02-14,Intel Xeon E5-2670 V3,CPU,47,Canceled
+2017-01-24,Intel Xeon E5-2680,CPU,70,Shipped
+2016-11-29,Intel Xeon E5-2680 V4,CPU,67,Pending
+2016-11-29,Intel Xeon E5-2680 V3 (OEM/Tray),CPU,74,Shipped
+2016-11-29,Intel Core i7-6950X,CPU,92,Pending
+2017-09-28,Intel Xeon E5-2643 V3 (OEM/Tray),CPU,139,Shipped
+2017-09-27,Intel Xeon E5-2660 V4,CPU,118,Shipped
+2016-09-27,Intel Xeon E5-2660 V3,CPU,113,Canceled
+2017-09-27,Intel Xeon E5-2660 V3 (OEM/Tray),CPU,41,Pending
+2016-08-16,Intel Xeon E5-2650 V2,CPU,46,Shipped
+2016-05-27,Intel Xeon E5-2650 V3,CPU,98,Pending
+2017-05-27,Intel Core i7-990X Extreme Edition,CPU,116,Shipped
+2017-05-27,Intel Xeon E5-2650 V4,CPU,60,Canceled
+2016-05-26,Intel Xeon E5-2650,CPU,70,Shipped
+2016-09-07,Intel Core i9-7900X,CPU,51,Shipped
+2016-09-07,Intel Xeon E5-1660 V3 (OEM/Tray),CPU,105,Shipped
+2016-08-24,Intel Xeon E5-2650L V3 (OEM/Tray),CPU,53,Shipped
+2016-08-16,Intel Core i7-5960X,CPU,105,Shipped
+2017-08-14,Intel Core 2 Extreme QX6800,CPU,79,Canceled
+2017-08-12,Intel Core i7-5960X (OEM/Tray),CPU,44,Shipped
+2017-08-12,Intel Xeon E5-2650 V3 (OEM/Tray),CPU,104,Shipped
+2017-03-09,Intel Xeon E5-2640 V4,CPU,129,Shipped
+2017-03-07,Intel Xeon E5-2640 V3,CPU,109,Shipped
+2016-06-12,Intel Core 2 Extreme QX9775,CPU,114,Shipped
+2016-09-05,Intel Core i7-6900K,CPU,38,Shipped
+2017-09-05,Intel Core i7-6900K (OEM/Tray),CPU,61,Canceled
+2017-02-19,AMD Opteron 6378,CPU,38,Canceled
+2015-05-31,Intel Core i7-3960X Extreme Edition,CPU,70,Shipped
+2016-10-22,Intel Core i7-4770K,CPU,68,Canceled
+2017-05-11,Intel Xeon E5-2687W,CPU,83,Canceled
+2015-05-03,Intel Xeon E5-2680 V2,CPU,93,Shipped
+2017-02-20,Intel Core i7-980,CPU,141,Shipped
+2017-02-20,Intel Core i7-7820X,CPU,133,Shipped
+2016-10-10,Intel Core i7-3930K,CPU,45,Shipped
+2016-10-10,Intel Xeon E5-2630 V4,CPU,150,Shipped
+2016-10-02,Intel Xeon E5-2630 V3,CPU,90,Canceled
+2016-10-02,Intel Core i7-4930K,CPU,116,Shipped
+2016-10-02,Intel Core i7-4790K,CPU,106,Canceled
+2016-10-02,Intel Xeon E5-2640 V2,CPU,80,Pending
+2016-09-29,Intel Xeon E5-1650 V4,CPU,45,Pending
+2016-09-29,Intel Xeon E5-1650 V4 (OEM/Tray),CPU,74,Pending
+2016-09-29,Intel Xeon E5-2630 V3 (OEM/Tray),CPU,118,Shipped
+2017-08-24,Intel Xeon E5-2630 V2,CPU,43,Canceled
+2016-08-24,Intel Xeon E5-1650 V3,CPU,51,Shipped
+2015-06-29,Intel Core i7-5930,CPU,73,Pending
+2017-06-30,PNY VCQP6000-PB,Video Card,46,Canceled
+2016-06-30,PNY VCQM6000-24GB-PB,Video Card,104,Shipped
+2015-06-30,PNY VCQM6000-PB,Video Card,49,Shipped
+2016-06-30,ATI FirePro W9000,Video Card,34,Shipped
+2016-06-21,ATI FirePro S9150,Video Card,123,Pending
+2013-06-21,AMD FirePro W9100,Video Card,130,Canceled
+2016-06-21,EVGA 12G-P4-3992-KR,Video Card,73,Shipped
+2016-06-14,AMD 100-505989,Video Card,127,Canceled
+2016-06-13,PNY VCQK6000-PB,Video Card,70,Shipped
+2017-03-17,PNY VCQP5000-PB,Video Card,75,Pending
+2017-02-21,HP C2J95AT,Video Card,55,Canceled
+2017-02-21,EVGA 12G-P4-1999-KR,Video Card,101,Shipped
+2016-02-17,PNY VCQM5000-PB,Video Card,74,Canceled
+2016-02-17,ATI FirePro S9050,Video Card,114,Shipped
+2017-02-10,AMD 100-5056062,Video Card,130,Pending
+2017-02-10,PNY VCQK5200-PB,Video Card,72,Canceled
+2017-02-10,AMD FirePro S7000,Video Card,61,Pending
+2017-01-02,AMD 100-506061,Video Card,104,Pending
+2015-12-14,ATI FirePro R5000,Video Card,143,Shipped
+2015-12-01,PNY VCQK4200-PB,Video Card,61,Shipped
+2016-12-01,Asus GTX780TI-3GD5,Video Card,98,Shipped
+2016-11-30,MSI GTX 1080 TI LIGHTNING Z,Video Card,57,Pending
+2017-11-01,Asus ROG-POSEIDON-GTX1080TI-P11G-GAMING,Video Card,146,Shipped
+2015-10-27,MSI GTX 1080 TI LIGHTNING X,Video Card,146,Shipped
+2015-10-28,Zotac ZT-P10810A-10P,Video Card,101,Shipped
+2016-10-28,MSI GAMING,Video Card,120,Canceled
+2015-10-28,Asus STRIX-GTX1080TI-O11G-GAMING,Video Card,97,Pending
+2016-09-19,PNY VCQP4000-PB,Video Card,73,Pending
+2016-09-14,Gigabyte GV-N108TAORUSX W-11GD,Video Card,92,Shipped
+2016-07-12,Zotac ZT-70203-10P,Video Card,65,Shipped
+2017-03-18,EVGA 11G-P4-6598-KR,Video Card,147,Canceled
+2017-01-07,MSI GTX 1080 TI SEA HAWK X,Video Card,145,Pending
+2017-01-05,Corsair CB-9060011-WW,Video Card,63,Shipped
+2016-02-08,MSI GTX 1080 TI AERO 11G OC,Video Card,133,Pending
+2017-02-01,NVIDIA VCQM4000-PB,Video Card,42,Canceled
+2016-11-17,Gigabyte GV-N108TAORUS X-11GD,Video Card,35,Shipped
+2017-02-20,Gigabyte GV-N1070WF2OC-8GD,Video Card,137,Shipped
+2017-01-03,MSI GeForce GTX 1080 TI ARMOR 11G OC,Video Card,114,Pending
+2017-10-15,EVGA 11G-P4-6696-KR,Video Card,46,Shipped
+2017-04-09,MSI GeForce GTX 1080 Ti GAMING X 11G,Video Card,123,Shipped
+2017-08-15,Zotac ZT-P10810C-10P,Video Card,139,Pending
+2016-12-01,Zotac ZT-P10810D-10P,Video Card,45,Canceled
+2015-04-09,PNY VCGGTX1080T11XGPB-OC,Video Card,84,Pending
+2017-05-11,Zotac ZT-P10810G-10P,Video Card,89,Shipped
+2016-12-03,Gigabyte GV-N98TWF3OC-6GD,Video Card,114,Canceled
+2016-12-20,PNY VCGGTX780T3XPB-OC,Video Card,70,Shipped
+2016-08-16,MSI GTX 980 Ti Gaming 6G,Video Card,38,Pending
+2015-05-02,Gigabyte GV-N108TAORUS-11GD,Video Card,138,Shipped
+2016-09-29,EVGA 06G-P4-4998-KR,Video Card,34,Pending
+2016-12-13,MSI GTX 1080 Ti DUKE 11G OC,Video Card,39,Shipped
+2016-12-02,Crucial,Storage,104,Shipped
+2016-10-27,G.Skill TridentZ RGB,Storage,66,Shipped
+2016-06-14,Corsair Dominator Platinum,Storage,70,Shipped
+2016-06-13,G.Skill Trident Z,Storage,47,Canceled
+2017-03-17,G.Skill Trident Z RGB,Storage,69,Shipped
+2017-02-21,G.Skill Ripjaws V Series,Storage,117,Pending
+2017-02-21,Corsair Dominator Platinum,Storage,74,Shipped
+2016-02-17,Corsair Vengeance LPX,Storage,116,Shipped
+2016-02-17,Corsair Dominator Platinum,Storage,77,Pending
+2017-02-10,Corsair Vengeance LPX,Storage,65,Canceled
+2017-02-10,Corsair Dominator Platinum,Storage,45,Shipped
+2017-02-10,Corsair Vengeance LPX,Storage,70,Pending
+2017-01-02,Corsair Vengeance LPX,Storage,123,Shipped
+2015-12-14,G.Skill Ripjaws 4 Series,Storage,58,Shipped
+2015-12-01,Kingston HyperX Beast,Storage,67,Pending
+2016-12-01,Crucial,Storage,106,Pending
+2016-11-30,Corsair Vengeance Pro,Storage,62,Canceled
+2017-11-01,Corsair Dominator Platinum,Storage,78,Shipped
+2015-10-27,G.Skill Trident Z RGB,Storage,146,Pending
+2015-10-28,Crucial,Storage,45,Canceled
+2016-06-21,G.Skill Trident Z,Storage,50,Shipped
+2013-06-21,Crucial,Storage,119,Shipped
+2016-06-21,G.Skill Trident Z,Storage,77,Canceled
+2016-06-14,G.Skill Trident Z,Storage,120,Shipped
+2016-06-13,Corsair Dominator Platinum,Storage,62,Pending
+2017-03-17,Kingston,Storage,97,Canceled
+2017-02-21,Corsair Vengeance LPX,Storage,33,Shipped
+2017-02-21,G.Skill Trident Z,Storage,134,Shipped
+2016-02-17,G.Skill Trident Z,Storage,105,Shipped
+2016-02-17,G.Skill Trident Z,Storage,129,Canceled
+2017-02-10,G.Skill Ripjaws V Series,Storage,52,Pending
+2017-02-10,Corsair Dominator Platinum,Storage,108,Shipped
+2017-02-10,Corsair Dominator Platinum,Storage,131,Canceled
+2017-01-02,G.Skill Trident Z,Storage,82,Shipped
+2015-12-14,G.Skill Trident Z,Storage,66,Pending
+2015-12-01,G.Skill Trident Z,Storage,112,Canceled
+2016-12-01,G.Skill Ripjaws V Series,Storage,107,Pending
+2016-11-30,G.Skill Ripjaws V Series,Storage,98,Canceled
+2017-11-01,Corsair Vengeance LPX,Storage,89,Canceled
+2015-10-27,Corsair Dominator Platinum,Storage,70,Pending
+2015-10-28,Corsair Vengeance LPX,Storage,32,Canceled
+2016-10-28,G.Skill Ripjaws V Series,Storage,34,Shipped
+2015-10-28,G.Skill Ripjaws V Series,Storage,138,Shipped
+2016-09-19,G.Skill Ripjaws V Series,Storage,75,Shipped
+2016-09-14,G.Skill Ripjaws V Series,Storage,47,Shipped
+2016-07-12,G.Skill Ripjaws V Series,Storage,83,Shipped
+2017-03-18,G.Skill Ripjaws V Series,Storage,40,Pending
+2017-01-07,Kingston,Storage,121,Pending
+2017-01-05,Corsair Dominator Platinum,Storage,42,Canceled
+2016-02-08,Kingston,Storage,66,Shipped
+2017-02-01,G.Skill Trident X,Storage,52,Canceled
+2016-11-17,Corsair Vengeance LPX,Storage,38,Pending
+2017-02-20,G.Skill Ripjaws V Series,Storage,123,Canceled
+2017-02-14,G.Skill Ripjaws V Series,Storage,86,Canceled
+2017-02-14,Kingston,Storage,74,Canceled
+2017-01-24,G.Skill Ripjaws V Series,Storage,98,Pending
+2016-11-29,G.Skill Ripjaws V Series,Storage,136,Shipped
+2016-11-29,Kingston,Storage,50,Pending
+2016-11-29,Intel DP35DPM,Mother Board,71,Shipped
+2017-09-28,Asus X99-E-10G WS,Mother Board,54,Shipped
+2017-09-27,Asus ROG MAXIMUS IX EXTREME,Mother Board,137,Pending
+2016-09-27,Asus RAMPAGE V EXTREME,Mother Board,35,Shipped
+2017-09-27,Asus Z10PE-D8 WS,Mother Board,47,Canceled
+2016-08-16,MSI X99A GODLIKE GAMING CARBON,Mother Board,96,Pending
+2016-05-27,Supermicro H8DG6-F,Mother Board,106,Shipped
+2017-05-27,Asus Rampage V Edition 10,Mother Board,84,Canceled
+2017-05-27,Gigabyte GA-Z270X-Gaming 9,Mother Board,60,Pending
+2016-05-26,Gigabyte X299 AORUS Gaming 9,Mother Board,127,Shipped
+2016-09-07,ASRock E3C224D4M-16RE,Mother Board,126,Canceled
+2016-09-07,Asus PRIME X299-DELUXE,Mother Board,146,Pending
+2016-08-24,Asus X99-E WS/USB 3.1,Mother Board,64,Shipped
+2016-08-16,Supermicro X9SRH-7TF,Mother Board,82,Canceled
+2017-08-14,Asus Z10PE-D16 WS,Mother Board,134,Pending
+2017-08-12,ASRock X99 Extreme11,Mother Board,90,Shipped
+2017-08-12,Supermicro MBD-X10DAX,Mother Board,67,Shipped
+2017-03-09,Asus X99-DELUXE/U3.1,Mother Board,52,Canceled
+2017-03-07,Supermicro X11SSL-CF,Mother Board,87,Pending
+2016-06-12,Asus KGPE-D16,Mother Board,90,Shipped
+2016-09-05,Asus Z10PE-D16,Mother Board,75,Canceled
+2017-09-05,ASRock C2750D4I,Mother Board,133,Shipped
+2017-02-19,Gigabyte X299 AORUS Gaming 7,Mother Board,56,Shipped
+2015-05-31,MSI X99A GODLIKE GAMING,Mother Board,142,Pending
+2016-10-22,MSI X299 GAMING M7 ACK,Mother Board,77,Canceled
+2017-05-11,Supermicro MBD-X10DRI-O,Mother Board,65,Canceled
+2015-05-03,Asus MAXIMUS IX FORMULA,Mother Board,96,Shipped
+2017-02-20,Asus X99-DELUXE II,Mother Board,56,Canceled
+2017-02-20,ASRock Fatal1ty X299 Professional Gaming i9,Mother Board,118,Shipped
+2016-10-10,ASRock EP2C612 WS,Mother Board,102,Shipped
+2016-10-10,ASRock Z270 SuperCarrier,Mother Board,89,Pending
+2016-10-02,Asus MAXIMUS VIII EXTREME/ASSEMBLY,Mother Board,33,Canceled
+2016-10-02,Asus STRIX X299-E GAMING,Mother Board,131,Shipped
+2016-10-02,Gigabyte X299 AORUS Ultra Gaming,Mother Board,86,Pending
+2016-10-02,Asus TUF X299 MARK 1,Mother Board,94,Shipped
+2016-09-29,Asus Z170-WS,Mother Board,86,Canceled
+2016-09-29,MSI X299 GAMING PRO CARBON AC,Mother Board,99,Pending
+2016-09-29,MSI X99A XPOWER GAMING TITANIUM,Mother Board,110,Pending
+2017-08-24,Asus ROG STRIX X99 GAMING,Mother Board,73,Shipped
+2016-08-24,FEVGA 12G-P4-3992-KR,Mother Board,105,Shipped
+2015-06-29,Asus PRIME X299-A,Mother Board,144,Pending
+2017-06-30,Gigabyte GA-X99-UD5 WIFI,Mother Board,59,Shipped
+2016-06-30,ASRock EP2C602-4L/D16,Mother Board,35,Shipped
+2015-06-30,MSI Z170A KRAIT GAMING 3X,Mother Board,35,Canceled
+2016-06-30,MSI Z170 Krait Gaming,Mother Board,94,Shipped
+2016-06-21,MSI Z170A KRAIT GAMING,Mother Board,50,Shipped
+2013-06-21,Asus MAXIMUS IX CODE,Mother Board,112,Pending
+2016-06-21,Asus Sabertooth 990FX,Mother Board,75,Pending
+2016-06-14,MSI X99A WORKSTATION,Mother Board,145,Shipped
+2016-06-13,Intel DG43RK,Mother Board,143,Shipped
+2017-03-17,Asus VANGUARD B85,Mother Board,134,Canceled
+2017-02-21,EVGA Z270 Classified K,Mother Board,143,Pending
+2017-02-21,EVGA Classified,Mother Board,119,Pending
+2016-02-17,MSI Z270 XPOWER GAMING TITANIUM,Mother Board,76,Canceled
+2016-02-17,ASRock X299 Taichi,Mother Board,45,Shipped
+2017-02-10,MSI X299 TOMAHAWK ARCTIC,Mother Board,119,Canceled
+2017-02-10,Supermicro X10SAT-O,Mother Board,89,Canceled
+2017-02-10,Gigabyte X299 AORUS Gaming 3,Mother Board,83,Pending
+2017-01-02,Supermicro MBD-X10DAL-I-O,Mother Board,61,Shipped
+2015-12-14,Western Digital WD10EZEX,Storage,134,Shipped
+2015-12-01,Seagate ST2000DM006,Storage,48,Shipped
+2016-12-02,Samsung MZ-75E250B/AM,Storage,45,Canceled
+2016-10-27,Samsung MZ-75E500B/AM,Storage,87,Canceled
+2017-10-27,SanDisk SDSSDA-240G-G26,Storage,40,Pending
+2016-12-14,Samsung MZ-V6E250,Storage,62,Pending
+2016-12-13,SA400S37/120G,Storage,70,Canceled
+2015-04-26,Samsung MZ-75E1T0B/AM,Storage,82,Pending
+2017-04-26,Samsung MZ-V6E500,Storage,133,Shipped
+2015-04-09,Seagate ST3000DM008,Storage,42,Canceled
+2017-02-15,Western Digital WDS250G1B0A,Storage,57,Shipped
+2017-02-14,ADATA ASU800SS-128GT-C,Storage,44,Pending
+2017-02-14,Seagate ST1000DM010,Storage,61,Pending
+2017-01-24,Samsung MZ-75E4T0B,Storage,80,Canceled
+2016-11-29,Intel SSDPECME040T401,Storage,92,Shipped
+2016-11-29,Western Digital WD2003FZEX,Storage,95,Shipped
+2016-11-29,Samsung MZ-V6P512BW,Storage,139,Pending
+2017-09-28,Hitachi HUS724030ALE641,Storage,32,Canceled
+2017-09-27,Samsung MZ-V6P2T0BW,Storage,137,Shipped
+2016-09-27,Seagate ST10000DM0004,Storage,67,Canceled
+2017-09-27,ADATA ASU800SS-512GT-C,Storage,72,Pending
+2016-08-16,Samsung MZ-V6E1T0,Storage,59,Pending
+2016-05-27,Western Digital WD1003FZEX,Storage,80,Canceled
+2017-05-27,SanDisk SDSSDA-120G-G26,Storage,49,Shipped
+2017-05-27,Crucial CT525MX300SSD1,Storage,86,Shipped
+2016-05-26,Hitachi A7K1000-1000,Storage,148,Shipped
+2016-09-07,Samsung MZ-V6P1T0BW,Storage,104,Shipped
+2016-09-07,Samsung MZ-7KE256BW,Storage,122,Canceled
+2016-08-24,Seagate ST2000DX002,Storage,70,Pending
+2016-08-16,Western Digital WD5000AACS,Storage,138,Shipped
+2017-08-14,SanDisk SDSSDHII-240G-G25,Storage,125,Canceled
+2017-08-12,PNY SSD7CS1311-120-RB,Storage,71,Pending
+2017-08-12,PNY SSD9SC240GMDA-RB,Storage,117,Shipped
+2017-03-09,Crucial CT1050MX300SSD1,Storage,125,Canceled
+2017-03-07,Western Digital WDS250G1B0B,Storage,130,Canceled
+2016-06-12,Samsung MZ-75E120B/AM,Storage,115,Pending
+2016-09-05,Western Digital WDS500G1B0B,Storage,56,Shipped
+2017-09-05,Hitachi HUA723020ALA640,Storage,99,Shipped
+2017-02-19,Western Digital WD2500AVVS,Storage,87,Canceled
+2015-05-31,Seagate ST1000DX002,Storage,138,Shipped
+2016-10-22,Crucial CT275MX300SSD1,Storage,106,Canceled
+2017-05-11,Seagate ST31000340NS - FFP,Storage,76,Pending
+2015-05-03,Western Digital WD101KRYZ,Storage,126,Pending
+2017-02-20,Crucial CT525MX300SSD4,Storage,106,Canceled
+2017-02-20,Western Digital WD2500AAJS,Storage,75,Shipped
+2016-10-10,Western Digital WD20EZRZ,Storage,86,Pending
+2016-10-10,Western Digital WDS256G1X0C,Storage,80,Shipped
+2016-10-02,SanDisk SDSSDHII-480G-G25,Storage,131,Shipped
+2016-10-02,Kingston  SV300S37A/120G,Storage,121,Canceled
+2016-10-02,Kingston (KVR800D2N6/2G) DDR2 2GB,RAM,63,Pending
+2016-10-02,Hynix Genuine (H15201504-11) 4 GB DDR3,RAM,82,Shipped
+2016-09-29,HP (500203-061) 4GB DDR3,RAM,41,Canceled
+2016-09-29,Corsair Vengeance LPX (CMK8GX4M1A2400C16R) 8GB,RAM,118,Canceled
+2016-09-29,Hynix (H15201504-8) Genuine DDR2 2 GB,RAM,133,Pending
+2017-08-24,Hynix 1333FSB 4GB DDR3,RAM,80,Shipped
+2016-08-24,Kingston HyperX FURY (HX318C10F/4) DDR3 4GB,RAM,71,Pending
+2015-06-29,Simmtronics 2GB DDR2 667Mhz,RAM,46,Shipped
+2017-06-30,Samsung (M378T5263AZ3) 2GB DDR2,RAM,120,Canceled
+2016-06-30,Transcend (JM1333KLN-4G) DDR3 4GB,RAM,59,Pending
+2015-06-30,Kingston (KVR1333D3N9/4G) DDR3 4GB,RAM,80,Shipped
+2016-06-30,Adata Premier (AD3U1600C2G11-R) 2GB DDR3,RAM,51,Shipped
+2016-06-21,Corsair Vengeance LPX (CMK16GX4M2B3000C15B) 16GB,RAM,45,Shipped
+2013-06-21,Kingston (KVR800D2N6K2) 4GB (2 x 2 GB) DDR2,RAM,122,Canceled
+2016-06-21,Simmtronics 2GB DDR2 800Mhz,RAM,99,Pending
+2016-06-14,Kingston (KVR1333D3N9/2G) DDR3 2GB,RAM,137,Shipped
+2016-06-13,Adata XPG (AX3U1600W4G11-RD) 4GB,RAM,37,Canceled
+2017-03-17,Kingston Fury (HX316C10FB/8) 8 GB,RAM,130,Shipped
+2017-02-21,Hynix (H15201504-9) Genuine DDR3 2 GB,RAM,87,Shipped
+2017-02-21,G.Skill TridentX (F3-2400C10D-8GTX) DDR3 8GB,RAM,149,Pending
+2016-02-17,G.Skill RipjawsX (F3-1600C9Q-32GXM) DDR3 32 GB,RAM,149,Canceled
+2016-02-17,Transcend JetRam (JM1600KLH-8G) DDR3 8GB,RAM,83,Pending
+2017-02-10,Kingston HyperX FURY (HX318C10F/8) DDR3 8GB,RAM,94,Canceled
+2017-02-10,Kingston HyperX FURY (HX316C10FR/8) DDR3 8GB,RAM,79,Pending
+2017-02-10,Transcend JetRam (JM1600KLH-4G) DDR3 4GB,RAM,114,Shipped
+2017-01-02,Transcend TS512MLK64V3N DDR3 4GB,RAM,143,Shipped
+2015-12-14,Transcend (TS512MLK64W6H) DDR3 4GB,RAM,117,Canceled
+2015-12-01,Hynix 6671G DDR2 1GB,RAM,114,Canceled
+2016-12-01,Kingston ValueRAM (KVR1333D3N9/8G) 8 GB DDR3,RAM,129,Pending
+2016-11-30,Zion ZHY16004096 4 GB Ddr3,RAM,150,Pending
+2017-11-01,Kingston KVR (KVR16N11/8-SP) 8 GB DDR3,RAM,58,Canceled
+2015-10-27,Hynix (HYMD2GB) 2GB DDR2,RAM,61,Shipped
+2015-10-28,Silicon Power (SP008GBLFU240B02) 8GB DDR4,RAM,37,Pending
+2017-02-20,A-DATA (AX4U300038G16-SRS) 8GB DDR4,RAM,133,Shipped
+2017-01-03,Intel Xeon E5-2697 V2,CPU,37,Shipped
+2017-10-15,Intel Xeon E5-2695 V4,CPU,121,Canceled
+2017-04-09,Intel Xeon E5-2695 V2,CPU,55,Pending
+2017-08-15,Intel Xeon E5-2643 V2 (OEM/Tray),CPU,111,Canceled
+2016-12-01,Intel Xeon E5-2690 (OEM/Tray),CPU,133,Shipped
+2015-04-09,Intel Xeon E5-2687W V3,CPU,95,Canceled
+2017-05-11,Intel Xeon E5-2687W V4,CPU,39,Shipped
+2016-12-03,Intel Xeon E5-2667 V3 (OEM/Tray),CPU,46,Canceled
+2016-12-20,Intel Xeon E5-2690 V4,CPU,77,Pending
+2016-08-16,Intel Xeon E5-2690 V3,CPU,114,Shipped
+2015-05-02,Intel Xeon E5-2470V2,CPU,60,Shipped
+2016-09-29,Intel Xeon E5-2683 V4,CPU,87,Canceled
+2016-12-13,Intel Xeon E5-2637 V2 (OEM/Tray),CPU,92,Shipped
+2016-12-02,Intel Xeon E5-2683 V4 (OEM/Tray),CPU,83,Pending
+2016-10-27,Intel Core i7-4960X Extreme Edition,CPU,106,Canceled
+2016-06-14,Intel Xeon E5-2699 V4 (OEM/Tray),CPU,43,Shipped
+2016-06-13,Intel Xeon E5-1680 V3 (OEM/Tray),CPU,74,Canceled
+2017-03-17,Intel Xeon E5-2643 V4 (OEM/Tray),CPU,85,Pending
+2017-02-21,Intel Core i7-6950X (OEM/Tray),CPU,133,Canceled
+2017-02-21,Intel Xeon E5-2670 V3,CPU,75,Shipped
+2016-02-17,Intel SSDPECME040T401,Storage,50,Pending
+2016-02-17,Western Digital WD2003FZEX,Storage,147,Shipped
+2017-02-10,Samsung MZ-V6P512BW,Storage,76,Canceled
+2017-02-10,Hitachi HUS724030ALE641,Storage,128,Shipped
+2017-02-10,Samsung MZ-V6P2T0BW,Storage,82,Shipped
+2017-01-02,Seagate ST10000DM0004,Storage,112,Pending
+2015-12-14,ADATA ASU800SS-512GT-C,Storage,80,Pending
+2015-12-01,Samsung MZ-V6E1T0,Storage,98,Pending
+2016-12-01,Western Digital WD1003FZEX,Storage,77,Canceled
+2016-11-30,SanDisk SDSSDA-120G-G26,Storage,126,Shipped
+2017-11-01,Crucial CT525MX300SSD1,Storage,42,Shipped
+2015-10-27,Hitachi A7K1000-1000,Storage,88,Pending
+2015-10-28,Samsung MZ-V6P1T0BW,Storage,141,Canceled
+2016-06-21,Samsung MZ-7KE256BW,Storage,71,Shipped
+2013-06-21,Seagate ST2000DX002,Storage,84,Pending
+2016-06-21,Western Digital WD5000AACS,Storage,82,Shipped
+2016-06-14,SanDisk SDSSDHII-240G-G25,Storage,81,Shipped
+2016-06-13,PNY SSD7CS1311-120-RB,Storage,46,Canceled
+2017-03-17,PNY SSD9SC240GMDA-RB,Storage,145,Pending
+2017-02-21,Crucial CT1050MX300SSD1,Storage,134,Shipped
+2017-02-21,Asus ROG STRIX X99 GAMING,Mother Board,113,Shipped
+2016-02-17,Asus SABERTOOTH X99,Mother Board,59,Canceled
+2016-02-17,Asus PRIME X299-A,Mother Board,140,Pending
+2017-02-10,Gigabyte GA-X99-UD5 WIFI,Mother Board,37,Shipped
+2017-02-10,ASRock EP2C602-4L/D16,Mother Board,132,Canceled
+2017-02-10,MSI Z170A KRAIT GAMING 3X,Mother Board,69,Shipped
+2017-01-02,MSI Z170 Krait Gaming,Mother Board,37,Pending
+2015-12-14,MSI Z170A KRAIT GAMING,Mother Board,41,Shipped
+2015-12-01,Asus MAXIMUS IX CODE,Mother Board,49,Canceled
+2016-12-01,Asus Sabertooth 990FX,Mother Board,112,Pending
+2016-11-30,MSI X99A WORKSTATION,Mother Board,75,Shipped
+2017-11-01,Intel DG43RK,Mother Board,78,Shipped
+2015-10-27,Asus VANGUARD B85,Mother Board,58,Shipped
+2015-10-28,EVGA Z270 Classified K,Mother Board,83,Canceled
+2016-10-28,EVGA Classified,Mother Board,110,Canceled
+2015-10-28,MSI Z270 XPOWER GAMING TITANIUM,Mother Board,89,Canceled
+2016-09-19,ASRock X299 Taichi,Mother Board,83,Pending
+2016-09-14,MSI X299 TOMAHAWK ARCTIC,Mother Board,105,Shipped
+2016-07-12,Supermicro X10SAT-O,Mother Board,60,Shipped
+2017-03-18,ASRock EP2C602-4L/D16,Mother Board,59,Canceled
+2017-01-07,EVGA 12G-P4-3992-KR,Video Card,71,Shipped
+2017-01-05,AMD 100-505989,Video Card,51,Pending
+2016-02-08,PNY VCQK6000-PB,Video Card,103,Shipped
+2017-02-01,PNY VCQP5000-PB,Video Card,68,Pending
+2016-11-17,HP C2J95AT,Video Card,34,Canceled
+2017-02-20,EVGA 12G-P4-1999-KR,Video Card,113,Shipped
+2017-02-14,PNY VCQM5000-PB,Video Card,139,Pending
+2017-02-14,ATI FirePro S9050,Video Card,144,Canceled
+2017-01-24,AMD 100-5056062,Video Card,99,Shipped
+2016-11-29,PNY VCQK5200-PB,Video Card,101,Shipped
+2016-11-29,AMD FirePro S7000,Video Card,147,Canceled
+2016-11-29,AMD 100-506061,Video Card,37,Shipped
+2017-09-28,ATI FirePro R5000,Video Card,114,Shipped
+2017-09-27,PNY VCQK4200-PB,Video Card,123,Canceled
+2016-09-27,Asus GTX780TI-3GD5,Video Card,82,Pending
+2017-09-27,MSI GTX 1080 TI LIGHTNING Z,Video Card,32,Shipped
+2016-08-16,Asus ROG-POSEIDON-GTX1080TI-P11G-GAMING,Video Card,66,Pending
+2016-05-27,MSI GTX 1080 TI LIGHTNING X,Video Card,82,Canceled
+2017-05-27,Zotac ZT-P10810A-10P,Video Card,157,Shipped
+2017-05-27,MSI GAMING,Video Card,32,Canceled
+2017-11-02,Asus ROG-POSEIDON-GTX1080TI-P11G-GAMING,Video Card,134,Shipped

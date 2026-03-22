@@ -1,0 +1,2 @@
+date,product_name,category_name,recommended_qty,final_ordered_qty,override_flag,actual_sales,stockout_flag,overstock_flag,trend_score,risk_score
+2026-03-18 21:57:24.774968,Asus ROG-POSEIDON-GTX1080TI-P11G-GAMING,Video Card,133,133,0,134,1,0,0.0,0.7691631552859116

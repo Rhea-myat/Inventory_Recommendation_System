@@ -1,0 +1,2 @@
+model_version,model_name,train_rows,validation_rows,positive_rate_train,positive_rate_val,accuracy,precision,recall,f1,roc_auc,retrain_date,notes
+v2,LogisticRegression_balanced,663,221,0.0889894419306184,0.39819004524886875,0.6561085972850679,0.575,0.5227272727272727,0.5476190476190477,0.6724196855775804,2026-03-19 18:39:22,rolling retraining
