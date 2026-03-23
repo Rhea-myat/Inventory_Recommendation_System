@@ -334,7 +334,9 @@ def match_topics_to_categories(latest_topic_trends: pd.DataFrame, sub1_df: pd.Da
 def load_existing_social_trends() -> pd.DataFrame:
     candidate_files = [
         SOCIAL_TREND_OUTPUT,
-        ROOT_SOCIAL_TREND_OUTPUT,
+        BASE_DIR / "social_trend_signals_v2.csv",
+        BASE_DIR / "data" / "output" / "social_trend_signals.csv",
+        Path("social_trend_signals_v2.csv"),
         Path("social_trend_signals.csv"),
     ]
     for path in candidate_files:
@@ -343,9 +345,56 @@ def load_existing_social_trends() -> pd.DataFrame:
             return pd.read_csv(path)
 
     raise FileNotFoundError(
-        "social_trend_signals.csv not found, and fresh generation requires kagglehub, sentence-transformers, and hdbscan."
+        "No existing social trend file was found. Checked social_trend_signals_v2.csv and social_trend_signals.csv in deployment/subsystem2_python_files/data/output/ and the subsystem root folder. Fresh generation requires kagglehub, sentence-transformers, and hdbscan."
     )
 
+from datetime import datetime
+
+def log_sub2_generation(clustered_df: pd.DataFrame, latest_topic_trends: pd.DataFrame):
+    log_dir = PROJECT_ROOT / "model_logs"
+    log_dir.mkdir(exist_ok=True)
+
+    log_file = log_dir / "subsystem2_generation_history.csv"
+
+    if "topic_id" in clustered_df.columns:
+        num_topics = clustered_df["topic_id"].nunique()
+        num_noise = (clustered_df["topic_id"] == -1).sum()
+        num_valid = clustered_df[clustered_df["topic_id"] != -1]["topic_id"].nunique()
+        input_rows = len(clustered_df)
+        notes = "topic clustering + trend scoring"
+    else:
+        num_topics = latest_topic_trends["topic_id"].nunique() if "topic_id" in latest_topic_trends.columns else 0
+        num_noise = 0
+        num_valid = num_topics
+        input_rows = 0
+        notes = "loaded existing trend signals"
+
+    num_trending_topics = (
+        int(latest_topic_trends["is_trending"].sum())
+        if "is_trending" in latest_topic_trends.columns
+        else 0
+    )
+
+    log_entry = {
+        "timestamp": datetime.now(),
+        "model_version": "v2",
+        "embedding_model": "all-MiniLM-L6-v2",
+        "input_rows": input_rows,
+        "num_topics_found": int(num_topics),
+        "num_noise_points": int(num_noise),
+        "num_valid_topics": int(num_valid),
+        "num_trending_topics": num_trending_topics,
+        "notes": notes
+    }
+
+    df = pd.DataFrame([log_entry])
+
+    if log_file.exists():
+        df.to_csv(log_file, mode="a", header=False, index=False)
+    else:
+        df.to_csv(log_file, index=False)
+
+    print("Subsystem 2 generation logged:", log_file)
 
 if __name__ == "__main__":
     can_generate_social_trends = all(
@@ -357,8 +406,10 @@ if __name__ == "__main__":
         clustered_df = cluster_topics(twitter_df)
         save_topic_centroids(clustered_df)
         latest_topic_trends = build_latest_topic_trends(clustered_df)
+        log_sub2_generation(clustered_df, latest_topic_trends)
     else:
         latest_topic_trends = load_existing_social_trends()
+        log_sub2_generation(pd.DataFrame(), latest_topic_trends)
 
     latest_topic_trends.to_csv(SOCIAL_TREND_OUTPUT, index=False)
     print("Saved:", SOCIAL_TREND_OUTPUT)
