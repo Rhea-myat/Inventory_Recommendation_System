@@ -3,6 +3,13 @@ import streamlit as st
 from pathlib import Path
 import altair as alt
 import joblib
+import numpy as np
+import re
+
+try:
+    from sentence_transformers import SentenceTransformer
+except ImportError:
+    SentenceTransformer = None
 
 st.set_page_config(
     page_title="AI Inventory Recommendation Dashboard",
@@ -49,6 +56,11 @@ TOP_RECOMMENDATION_COLUMNS = [
 FEEDBACK_REQUIRED_COLUMNS = ["ProductName", "final_recommended_qty"]
 FINAL_RECOMMENDATIONS_PATH = BASE_DIR / "subsystem4_python_files" / "data" / "output" / "final_recommendations_v2.csv"
 
+TOPIC_IDS_PATH = PROJECT_ROOT / "models" / "topic_ids_v2.npy"
+TOPIC_CENTROIDS_PATH = PROJECT_ROOT / "models" / "topic_centroids_v2.npy"
+SUB2_TOPIC_SIGNALS_PATH = BASE_DIR / "subsystem2_python_files" / "data" / "output" / "social_trend_signals_v2.csv"
+SUB2_CATEGORY_TRENDS_PATH = BASE_DIR / "subsystem2_python_files" / "data" / "output" / "category_social_trends_v2.csv"
+
 
 def first_existing_path(*candidate_paths: Path) -> Path | None:
     for candidate_path in candidate_paths:
@@ -69,7 +81,7 @@ SUB1_OUTPUT_PATHS = [
 ]
 SUB2_OUTPUT_PATHS = [
     BASE_DIR / "subsystem2_python_files" / "data" / "output" / "category_social_trends_v2.csv",
-    BASE_DIR / "subsystem2_python_files" / "data" / "output" / "social_trend_signal_v2.csv",
+    BASE_DIR / "subsystem2_python_files" / "data" / "output" / "social_trend_signals_v2.csv",
 ]
 SUB3_OUTPUT_PATHS = [
     BASE_DIR / "subsystem3_python_files" / "data" / "output" / "risk_scoring_output_v2.csv"
@@ -119,6 +131,123 @@ def load_data(path: Path | None) -> pd.DataFrame:
             df[col] = pd.to_numeric(df[col], errors="coerce")
 
     return df
+
+
+# ------------------- Subsystem 2 Live Demo Helpers -------------------
+
+@st.cache_data
+def load_numpy_array(path: Path) -> np.ndarray | None:
+    if not path.exists():
+        return None
+    return np.load(path, allow_pickle=False)
+
+
+@st.cache_resource
+def load_sentence_model() -> SentenceTransformer | None:
+    if SentenceTransformer is None:
+        return None
+    return SentenceTransformer("all-MiniLM-L6-v2")
+
+
+def clean_social_text(text: str) -> str:
+    text = str(text)
+    text = re.sub(r"http\S+|www\.\S+", " ", text)
+    text = re.sub(r"@\w+", " ", text)
+    text = text.replace("#", " ")
+    text = re.sub(r"[^A-Za-z0-9\s]", " ", text)
+    text = re.sub(r"\s+", " ", text).strip().lower()
+    return text
+
+
+def cosine_similarity_score(a: np.ndarray, b: np.ndarray) -> float:
+    denom = np.linalg.norm(a) * np.linalg.norm(b)
+    if denom == 0:
+        return 0.0
+    return float(np.dot(a, b) / denom)
+
+
+def run_sub2_live_demo(user_text: str) -> dict | None:
+    if not user_text.strip():
+        return None
+
+    if not TOPIC_IDS_PATH.exists() or not TOPIC_CENTROIDS_PATH.exists():
+        return None
+
+    sentence_model = load_sentence_model()
+    if sentence_model is None:
+        return None
+
+    topic_ids = load_numpy_array(TOPIC_IDS_PATH)
+    topic_centroids = load_numpy_array(TOPIC_CENTROIDS_PATH)
+    topic_signals_df = load_data(SUB2_TOPIC_SIGNALS_PATH)
+    category_trends_df = load_data(SUB2_CATEGORY_TRENDS_PATH)
+
+    if topic_ids is None or topic_centroids is None or topic_signals_df.empty:
+        return None
+
+    clean_text = clean_social_text(user_text)
+    text_embedding = sentence_model.encode([clean_text], convert_to_numpy=True)[0]
+
+    similarity_scores = np.array([
+        cosine_similarity_score(text_embedding, centroid)
+        for centroid in topic_centroids
+    ])
+
+    best_idx = int(np.argmax(similarity_scores))
+    predicted_topic_id = int(topic_ids[best_idx])
+    similarity_score = float(similarity_scores[best_idx])
+
+    if similarity_score < 0.4:
+        return {
+            "input_text": user_text,
+            "clean_text": clean_text,
+            "predicted_topic_id": None,
+            "topic_keyword_text": "No strong matching trend found",
+            "trend_score": None,
+            "is_trending": 0,
+            "matched_category": "N/A",
+            "matched_category_social_trend_score": None,
+            "similarity_score": similarity_score,
+    }
+
+    topic_row_df = topic_signals_df[topic_signals_df["topic_id"] == predicted_topic_id]
+    if topic_row_df.empty:
+        return None
+
+    topic_row = topic_row_df.iloc[0]
+    topic_keyword_text = topic_row.get("topic_keyword_text", "N/A")
+    trend_score = topic_row.get("trend_score", np.nan)
+    is_trending = topic_row.get("is_trending", 0)
+
+    matched_category = "N/A"
+    matched_category_score = np.nan
+    if not category_trends_df.empty and "topic_keyword_text" in category_trends_df.columns:
+        category_match_df = category_trends_df[
+            category_trends_df["topic_keyword_text"].astype(str) == str(topic_keyword_text)
+        ].copy()
+        if not category_match_df.empty:
+            if "social_trend_score" in category_match_df.columns:
+                category_match_df["social_trend_score"] = pd.to_numeric(
+                    category_match_df["social_trend_score"], errors="coerce"
+                )
+                category_match_df = category_match_df.sort_values(
+                    "social_trend_score", ascending=False
+                )
+            best_category_row = category_match_df.iloc[0]
+            matched_category = best_category_row.get("CategoryName", "N/A")
+            matched_category_score = best_category_row.get("social_trend_score", np.nan)
+
+    return {
+        "input_text": user_text,
+        "clean_text": clean_text,
+        "predicted_topic_id": predicted_topic_id,
+        "topic_keyword_text": topic_keyword_text,
+        "trend_score": trend_score,
+        "is_trending": int(is_trending),
+        "matched_category": matched_category,
+        "matched_category_social_trend_score": matched_category_score,
+        "similarity_score": similarity_score,
+    }
 
 
 final_df = load_data(FINAL_RECOMMENDATIONS_PATH)
@@ -390,6 +519,56 @@ def render_sub1_live_prediction() -> None:
                 use_container_width=True,
                 height=get_table_height(product_output_df, min_height=120, max_height=320)
             )
+
+
+# ------------------- Subsystem 2 Live Prediction UI -------------------
+def render_sub2_live_prediction() -> None:
+    st.markdown("### Live Subsystem 2 Prediction")
+    st.caption("Enter a sample tweet or social text. The dashboard will encode the text, compare it with saved topic centroids, and return the closest topic and category relevance.")
+
+    if not TOPIC_IDS_PATH.exists() or not TOPIC_CENTROIDS_PATH.exists():
+        st.warning("Subsystem 2 centroid artifacts were not found in the models folder.")
+        return
+
+    if not SUB2_TOPIC_SIGNALS_PATH.exists():
+        st.warning("Subsystem 2 topic signals file was not found.")
+        return
+
+    if SentenceTransformer is None:
+        st.warning("sentence-transformers is not installed in this environment.")
+        return
+
+    sample_text = st.text_area(
+        "Enter sample tweet / social text",
+        value="Intel gaming CPU demand is rising fast this week and people are talking about upgrades.",
+        key="sub2_live_text",
+    )
+
+    if st.button("Run Live Subsystem 2 Prediction"):
+        prediction = run_sub2_live_demo(sample_text)
+        if prediction is None:
+            st.error("Live Subsystem 2 prediction could not be generated. Check the saved centroid files and Subsystem 2 outputs.")
+            return
+
+        result_df = pd.DataFrame([
+            {"Field": "Input Text", "Value": prediction["input_text"]},
+            {"Field": "Clean Text", "Value": prediction["clean_text"]},
+            {"Field": "Predicted Topic ID", "Value": prediction["predicted_topic_id"]},
+            {"Field": "Topic Keywords", "Value": prediction["topic_keyword_text"]},
+            {"Field": "Matched Category", "Value": prediction["matched_category"]},
+            {"Field": "Topic Trend Score", "Value": round(float(prediction["trend_score"]), 4) if pd.notna(prediction["trend_score"]) else "N/A"},
+            {"Field": "Category Social Trend Score", "Value": round(float(prediction["matched_category_social_trend_score"]), 4) if pd.notna(prediction["matched_category_social_trend_score"]) else "N/A"},
+            {"Field": "Trending", "Value": "Yes" if int(prediction["is_trending"]) == 1 else "No"},
+            {"Field": "Similarity Score", "Value": round(float(prediction["similarity_score"]), 4)},
+        ])
+
+        st.success("Live Subsystem 2 prediction completed.")
+        st.dataframe(
+            result_df,
+            use_container_width=True,
+            hide_index=True,
+            height=get_table_height(result_df, min_height=160, max_height=360),
+        )
 
 st.title("AI Inventory Recommendation Dashboard")
 st.caption(f"Data last updated: {TODAY.strftime('%Y-%m-%d')}")
@@ -765,6 +944,9 @@ with sub2_tab:
             use_container_width=True,
             height=get_table_height(preview_df, min_height=120, max_height=320)
         )
+
+        st.divider()
+        render_sub2_live_prediction()
 
 with sub3_tab:
     st.subheader("Subsystem 3 Interactive Testing")

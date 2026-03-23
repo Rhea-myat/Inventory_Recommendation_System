@@ -21,8 +21,13 @@ except ImportError:
 
 
 BASE_DIR = Path(__file__).resolve().parent
+DEPLOYMENT_DIR = BASE_DIR.parent
+PROJECT_ROOT = DEPLOYMENT_DIR.parent
 OUTPUT_DIR = BASE_DIR / "data" / "output"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+MODEL_DIR = PROJECT_ROOT / "models"
+MODEL_DIR.mkdir(parents=True, exist_ok=True)
 
 SOCIAL_TREND_OUTPUT = OUTPUT_DIR / "social_trend_signals_v2.csv"
 CATEGORY_SOCIAL_OUTPUT = OUTPUT_DIR / "category_social_trends_v2.csv" 
@@ -89,6 +94,7 @@ def cluster_topics(df: pd.DataFrame) -> pd.DataFrame:
 
     labels = clusterer.fit_predict(embeddings)
     df["topic_id"] = labels
+    df["embedding"] = list(embeddings)
     return df
 
 
@@ -177,7 +183,7 @@ def build_latest_topic_trends(df: pd.DataFrame) -> pd.DataFrame:
         )
 
     else:
-        daily_mentions["engagement_score"] = daily_mentions["engagement_score"].fillna(0.0)
+        daily_mentions["engagement_score"] = 0.0
 
     daily_mentions["trend_score"] = (
         0.5 * daily_mentions["volume_growth"].clip(lower=0)
@@ -186,9 +192,10 @@ def build_latest_topic_trends(df: pd.DataFrame) -> pd.DataFrame:
     )
 
     max_score = daily_mentions["trend_score"].max()
-    if max_score > 0:
+    if pd.notna(max_score) and max_score > 0:
         daily_mentions["trend_score"] = daily_mentions["trend_score"] / max_score
-        latest_topic_trends = (
+
+    latest_topic_trends = (
         daily_mentions.sort_values(["topic_id", "period"])
         .groupby("topic_id", as_index=False)
         .tail(1)
@@ -201,10 +208,14 @@ def build_latest_topic_trends(df: pd.DataFrame) -> pd.DataFrame:
 
 def load_subsystem1_output() -> pd.DataFrame:
     candidate_files = [
+        DEPLOYMENT_DIR / "subsystem1_python_files" / "data" / "output" / "subsystem1_product_recommendations_v2.csv",
+        DEPLOYMENT_DIR / "subsystem1_python_files" / "data" / "output" / "subsystem1_category_output_v2.csv",
+        PROJECT_ROOT / "deployment" / "subsystem1_python_files" / "data" / "output" / "subsystem1_product_recommendations_v2.csv",
+        PROJECT_ROOT / "deployment" / "subsystem1_python_files" / "data" / "output" / "subsystem1_category_output_v2.csv",
         BASE_DIR / "data" / "output" / "subsystem1_product_recommendations_v2.csv",
-        BASE_DIR / "subsystem1_product_recommendations_v2.csv",
-        BASE_DIR / "subsystem1_product_recommendations_v2.csv",
+        BASE_DIR / "data" / "output" / "subsystem1_category_output_v2.csv",
         Path("subsystem1_product_recommendations_v2.csv"),
+        Path("subsystem1_category_output_v2.csv"),
         Path("alloc_out.csv"),
     ]
     for p in candidate_files:
@@ -213,8 +224,33 @@ def load_subsystem1_output() -> pd.DataFrame:
             return pd.read_csv(p)
 
     raise FileNotFoundError(
-        "Subsystem 1 output not found. Make sure subsystem1_product_recommendations.csv exists."
+        "Subsystem 1 output not found. Checked subsystem1_product_recommendations_v2.csv and subsystem1_category_output_v2.csv in deployment/subsystem1_python_files/data/output/."
     )
+
+
+# Save topic centroids for clustering output
+def save_topic_centroids(clustered_df: pd.DataFrame) -> None:
+    valid_df = clustered_df[clustered_df["topic_id"] != -1].copy()
+
+    if "embedding" not in valid_df.columns:
+        raise ValueError("'embedding' column not found. Make sure embeddings are saved during clustering.")
+    if valid_df.empty:
+        raise ValueError("No clustered topics found to build centroids.")
+
+    topic_ids = []
+    centroids = []
+    for topic_id, group in valid_df.groupby("topic_id"):
+        topic_ids.append(topic_id)
+        centroid = np.mean(np.vstack(group["embedding"].to_numpy()), axis=0)
+        centroids.append(centroid)
+
+    topic_ids = np.array(topic_ids)
+    centroids = np.vstack(centroids)
+
+    np.save(MODEL_DIR / "topic_ids_v2.npy", topic_ids)
+    np.save(MODEL_DIR / "topic_centroids_v2.npy", centroids)
+    print("Saved topic_ids_v2.npy to:", MODEL_DIR / "topic_ids_v2.npy")
+    print("Saved topic_centroids_v2.npy to:", MODEL_DIR / "topic_centroids_v2.npy")
 
 
 STOP = {
@@ -320,6 +356,7 @@ if __name__ == "__main__":
     if can_generate_social_trends:
         twitter_df = load_twitter_dataset()
         clustered_df = cluster_topics(twitter_df)
+        save_topic_centroids(clustered_df)
         latest_topic_trends = build_latest_topic_trends(clustered_df)
     else:
         latest_topic_trends = load_existing_social_trends()
