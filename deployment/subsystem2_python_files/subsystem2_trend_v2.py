@@ -32,9 +32,6 @@ MODEL_DIR.mkdir(parents=True, exist_ok=True)
 SOCIAL_TREND_OUTPUT = OUTPUT_DIR / "social_trend_signals_v2.csv"
 CATEGORY_SOCIAL_OUTPUT = OUTPUT_DIR / "category_social_trends_v2.csv" 
 
-ROOT_SOCIAL_TREND_OUTPUT = BASE_DIR / "social_trend_signals_v2.csv"
-ROOT_CATEGORY_SOCIAL_OUTPUT = BASE_DIR / "category_social_trends_v2.csv"
-
 
 def load_twitter_dataset() -> pd.DataFrame:
     if kagglehub is None:
@@ -367,5 +364,4 @@ if __name__ == "__main__":
     sub1_df = load_subsystem1_output()
     category_social = match_topics_to_categories(latest_topic_trends, sub1_df)
     category_social.to_csv(CATEGORY_SOCIAL_OUTPUT, index=False)
-    category_social.to_csv(ROOT_CATEGORY_SOCIAL_OUTPUT, index=False)
     print("Saved:", CATEGORY_SOCIAL_OUTPUT)
