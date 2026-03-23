@@ -645,19 +645,24 @@ with dashboard_tab:
     if selected_risk != "All" and "risk_level" in filtered_df.columns:
         filtered_df = filtered_df[filtered_df["risk_level"] == selected_risk]
 
-    max_products = len(filtered_df)
+    max_products = int(len(filtered_df)) if not filtered_df.empty else 0
+
+    st.sidebar.markdown("**Top N products**")
+
     if max_products == 0:
         top_n = 0
-        st.sidebar.caption("Top N products unavailable for the current filters.")
+        st.sidebar.caption("No products available for the current filters.")
+    elif max_products == 1:
+        top_n = 1
+        st.sidebar.caption("Only 1 product available for the current filters.")
     else:
-        slider_min = 1 if max_products < 5 else 5
-        default_top_n = min(10, max_products)
         top_n = st.sidebar.slider(
-            "Top N products",
-            min_value=slider_min,
+            "",
+            min_value=1,
             max_value=max_products,
-            value=max(default_top_n, slider_min)
-        )
+            value=min(10, max_products),
+            label_visibility="collapsed",
+    )
 
     # ---------- KPIs ----------
     col1, col2, col3, col4 = st.columns(4)
