@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import pandas as pd
 import streamlit as st
 from pathlib import Path
@@ -5,6 +7,7 @@ import altair as alt
 import joblib
 import numpy as np
 import re
+from typing import Any, Optional
 
 try:
     from sentence_transformers import SentenceTransformer
@@ -143,7 +146,7 @@ def load_numpy_array(path: Path) -> np.ndarray | None:
 
 
 @st.cache_resource
-def load_sentence_model() -> SentenceTransformer | None:
+def load_sentence_model() -> Any | None:
     if SentenceTransformer is None:
         return None
     return SentenceTransformer("all-MiniLM-L6-v2")
