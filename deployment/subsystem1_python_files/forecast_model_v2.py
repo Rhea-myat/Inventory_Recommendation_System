@@ -4,9 +4,21 @@ import pandas as pd
 import numpy as np
 
 BASE_DIR = Path(__file__).resolve().parent
-PROJECT_DIR = BASE_DIR.parent
+DEPLOYMENT_DIR = BASE_DIR.parent
+PROJECT_ROOT = DEPLOYMENT_DIR.parent
 
-ARTIFACTS_PATH = PROJECT_DIR / "models" / "subsystem1_artifacts_v2.pkl"
+
+def resolve_existing_path(*candidates: Path) -> Path:
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+    return candidates[0]
+
+
+ARTIFACTS_PATH = resolve_existing_path(
+    PROJECT_ROOT / "models" / "subsystem1_artifacts_v2.pkl",
+    DEPLOYMENT_DIR / "models" / "subsystem1_artifacts_v2.pkl",
+)
 RAW_DATA_PATH = BASE_DIR / "data" / "updated_base_history.csv"
 OUTPUT_PATH = BASE_DIR / "data" / "output" / "subsystem1_category_output_v2.csv"
 

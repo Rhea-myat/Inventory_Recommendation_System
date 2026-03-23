@@ -8,7 +8,7 @@ PROJECT_DIR = BASE_DIR.parent
 
 
 SUB1_PATH = PROJECT_DIR / "subsystem1_python_files" / "data" / "output" / "subsystem1_product_recommendations_v2.csv"
-SUB2_PATH = PROJECT_DIR / "subsystem2_python_files" / "data" / "output" / "category_social_trends.csv"
+SUB2_PATH = PROJECT_DIR / "subsystem2_python_files" / "data" / "output" / "category_social_trends_v2.csv"
 SUB3_PATH = PROJECT_DIR / "subsystem3_python_files" / "data" / "output" / "risk_scoring_output_v2.csv"
 
 OUTPUT_PATH = PROJECT_DIR / "subsystem4_python_files" / "data" / "output" / "final_recommendations_v2.csv"

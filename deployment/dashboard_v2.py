@@ -10,38 +10,75 @@ st.set_page_config(
 )
 
 BASE_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = BASE_DIR.parent
+TODAY = pd.Timestamp.today().normalize()
+RECOMMENDATION_END_DATE = TODAY + pd.Timedelta(days=28)
+NUMERIC_COLUMNS = [
+    "base_reorder_qty",
+    "social_trend_score",
+    "risk_score",
+    "final_recommended_qty",
+    "probability_up",
+    "fusion_adjustment",
+    "recommended_qty",
+    "category_base_forecast",
+    "category_adjusted_forecast",
+    "forecast_score",
+]
+FINAL_RECOMMENDATION_COLUMNS = [
+    "CategoryName",
+    "ProductName",
+    "base_reorder_qty",
+    "social_trend_score",
+    "risk_score",
+    "risk_level",
+    "probability_up",
+    "fusion_adjustment",
+    "final_recommended_qty",
+    "risk_drivers",
+    "topic_keyword_text",
+]
+TOP_RECOMMENDATION_COLUMNS = [
+    "CategoryName",
+    "ProductName",
+    "base_reorder_qty",
+    "final_recommended_qty",
+    "risk_level",
+    "social_trend_score",
+]
+FEEDBACK_REQUIRED_COLUMNS = ["ProductName", "final_recommended_qty"]
+FINAL_RECOMMENDATIONS_PATH = BASE_DIR / "subsystem4_python_files" / "data" / "output" / "final_recommendations_v2.csv"
 
-DATA_PATH = BASE_DIR / "subsystem4_python_files" / "data" / "output" / "final_recommendations_v2.csv"
-SUB1_ARTIFACTS_PATH = BASE_DIR / "models" / "subsystem1_artifacts_v2.pkl"
 
-# Path to raw history for Subsystem 1 live feature computation
+def first_existing_path(*candidate_paths: Path) -> Path | None:
+    for candidate_path in candidate_paths:
+        if candidate_path.exists():
+            return candidate_path
+    return None
+
+
+SUB1_ARTIFACTS_PATH = first_existing_path(
+    PROJECT_ROOT / "models" / "subsystem1_artifacts_v2.pkl",
+    BASE_DIR / "models" / "subsystem1_artifacts_v2.pkl",
+)
+
 RAW_HISTORY_PATH = BASE_DIR / "subsystem1_python_files" / "data" / "updated_base_history.csv"
-
-SUB1_CANDIDATE_PATHS = [
+SUB1_OUTPUT_PATHS = [
     BASE_DIR / "subsystem1_python_files" / "data" / "output" / "subsystem1_category_output_v2.csv",
     BASE_DIR / "subsystem1_python_files" / "data" / "output" / "subsystem1_product_recommendations_v2.csv",
 ]
-SUB2_CANDIDATE_PATHS = [
+SUB2_OUTPUT_PATHS = [
     BASE_DIR / "subsystem2_python_files" / "data" / "output" / "category_social_trends_v2.csv",
     BASE_DIR / "subsystem2_python_files" / "data" / "output" / "social_trend_signal_v2.csv",
 ]
-SUB3_CANDIDATE_PATHS = [
+SUB3_OUTPUT_PATHS = [
     BASE_DIR / "subsystem3_python_files" / "data" / "output" / "risk_scoring_output_v2.csv"
 ]
 
 
-@st.cache_data
-def find_existing_path(paths: list[Path]) -> Path | None:
-    for path in paths:
-        if path.exists():
-            return path
-    return None
-
-
-# New function: load_sub1_artifacts
 @st.cache_resource
-def load_sub1_artifacts(path: Path) -> dict | None:
-    if not path.exists():
+def load_sub1_artifacts(path: Path | None) -> dict | None:
+    if path is None or not path.exists():
         return None
 
     artifacts = joblib.load(path)
@@ -57,7 +94,6 @@ def load_sub1_artifacts(path: Path) -> dict | None:
     return artifacts
 
 
-# Helper: Load raw history for Subsystem 1 feature computation
 @st.cache_data
 def load_raw_history(path: Path) -> pd.DataFrame:
     if not path.exists():
@@ -72,47 +108,42 @@ def load_raw_history(path: Path) -> pd.DataFrame:
 
 
 @st.cache_data
-
 def load_data(path: Path | None) -> pd.DataFrame:
     if path is None or not path.exists():
         return pd.DataFrame()
 
     df = pd.read_csv(path)
 
-    numeric_cols = [
-        "base_reorder_qty",
-        "social_trend_score",
-        "risk_score",
-        "final_recommended_qty",
-        "probability_up",
-        "fusion_adjustment",
-        "recommended_qty",
-        "category_base_forecast",
-        "category_adjusted_forecast",
-        "forecast_score",
-    ]
-    for col in numeric_cols:
+    for col in NUMERIC_COLUMNS:
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors="coerce")
 
     return df
 
 
-
-df = load_data(DATA_PATH)
-
-sub1_path = find_existing_path(SUB1_CANDIDATE_PATHS)
-sub2_path = find_existing_path(SUB2_CANDIDATE_PATHS)
-sub3_path = find_existing_path(SUB3_CANDIDATE_PATHS)
-
-sub1_df = load_data(sub1_path)
-sub2_df = load_data(sub2_path)
-sub3_df = load_data(sub3_path)
-
+final_df = load_data(FINAL_RECOMMENDATIONS_PATH)
+sub1_df = load_data(first_existing_path(*SUB1_OUTPUT_PATHS))
+sub2_df = load_data(first_existing_path(*SUB2_OUTPUT_PATHS))
+sub3_df = load_data(first_existing_path(*SUB3_OUTPUT_PATHS))
 sub1_artifacts = load_sub1_artifacts(SUB1_ARTIFACTS_PATH)
-
-# Load raw history for Subsystem 1 live prediction
 raw_history_df = load_raw_history(RAW_HISTORY_PATH)
+
+# with st.expander("Debug Data Loading", expanded=False):
+#     st.write("RUNNING FILE:", __file__)
+#     st.write("DATA PATH USED:", str(FINAL_RECOMMENDATIONS_PATH))
+#     st.write("DF SHAPE LOADED:", final_df.shape)
+#     st.write("DF COLUMNS:", final_df.columns.tolist())
+#
+#     if not final_df.empty:
+#         st.write("DF PREVIEW:")
+#         st.dataframe(final_df.head(10), width="stretch")
+#
+#     if not FINAL_RECOMMENDATIONS_PATH.exists():
+#         st.error("final_recommendations_v2.csv was not found in the expected folder.")
+#         st.write("Expected path:", str(FINAL_RECOMMENDATIONS_PATH))
+#     elif final_df.empty:
+#         st.warning("A file was found, but the loaded dataframe is empty.")
+#         st.write("Loaded file:", str(FINAL_RECOMMENDATIONS_PATH))
 
 
 def build_selection_labels(dataframe: pd.DataFrame) -> list[str]:
@@ -193,7 +224,6 @@ def get_table_height(
     calculated_height = header_height + max(row_count, 1) * row_height
     return max(min_height, min(calculated_height, max_height))
 
-# New function: render_sub1_live_prediction (auto-compute features from raw history)
 def render_sub1_live_prediction() -> None:
     st.markdown("### Live Subsystem 1 Prediction")
     st.caption("Select a category. The system will automatically compute features and run the model.")
@@ -214,16 +244,19 @@ def render_sub1_live_prediction() -> None:
     selected_category = st.selectbox("Select Category", categories)
 
     if st.button("Run Live Prediction"):
-        df = raw_history_df.copy()
-        df = df[df["CategoryName"] == selected_category]
+        category_history_df = raw_history_df.copy()
+        category_history_df = category_history_df[category_history_df["CategoryName"] == selected_category]
 
-        if df.empty:
+        if category_history_df.empty:
             st.error("No data found for selected category.")
             return
 
-        latest_date = df["OrderDate"].max()
+        latest_date = category_history_df["OrderDate"].max()
         start_date = latest_date - pd.Timedelta(days=27)
-        df_window = df[(df["OrderDate"] >= start_date) & (df["OrderDate"] <= latest_date)]
+        df_window = category_history_df[
+            (category_history_df["OrderDate"] >= start_date)
+            & (category_history_df["OrderDate"] <= latest_date)
+        ]
 
         daily = (
             df_window.groupby("OrderDate")["OrderItemQuantity"]
@@ -359,11 +392,11 @@ def render_sub1_live_prediction() -> None:
             )
 
 st.title("AI Inventory Recommendation Dashboard")
-# today date
-st.caption(f"Data last updated: {pd.to_datetime('today').strftime('%Y-%m-%d')}")
-#next 28days
-
-st.caption(f"Recommendation for {pd.to_datetime('today').strftime('%Y-%m-%d')} to {(pd.to_datetime('today') + pd.Timedelta(days=28)).strftime('%Y-%m-%d')}")
+st.caption(f"Data last updated: {TODAY.strftime('%Y-%m-%d')}")
+st.caption(
+    f"Recommendation for {TODAY.strftime('%Y-%m-%d')} to "
+    f"{RECOMMENDATION_END_DATE.strftime('%Y-%m-%d')}"
+)
 
 dashboard_tab, sub1_tab, sub2_tab, sub3_tab, sub4_tab = st.tabs([
     "Dashboard Overview",
@@ -377,32 +410,35 @@ with dashboard_tab:
 # ---------- Sidebar filters ----------
     st.sidebar.header("Filters")
 
-    categories = ["All"] + sorted(df["CategoryName"].dropna().unique().tolist()) if "CategoryName" in df.columns else ["All"]
+    categories = ["All"] + sorted(final_df["CategoryName"].dropna().unique().tolist()) if "CategoryName" in final_df.columns else ["All"]
     selected_category = st.sidebar.selectbox("Category", categories)
 
     risk_levels = ["All"]
-    if "risk_level" in df.columns:
-        risk_levels += sorted(df["risk_level"].dropna().unique().tolist())
+    if "risk_level" in final_df.columns:
+        risk_levels += sorted(final_df["risk_level"].dropna().unique().tolist())
     selected_risk = st.sidebar.selectbox("Risk Level", risk_levels)
 
-    filtered_df = df.copy()
-
-    max_products = len(filtered_df)
-
-    top_n = st.sidebar.slider(
-        "Top N products",
-        min_value=5,
-        max_value=max_products,
-        value=min(10, max_products)
-    )
-
-
+    filtered_df = final_df.copy()
 
     if selected_category != "All":
         filtered_df = filtered_df[filtered_df["CategoryName"] == selected_category]
 
     if selected_risk != "All" and "risk_level" in filtered_df.columns:
         filtered_df = filtered_df[filtered_df["risk_level"] == selected_risk]
+
+    max_products = len(filtered_df)
+    if max_products == 0:
+        top_n = 0
+        st.sidebar.caption("Top N products unavailable for the current filters.")
+    else:
+        slider_min = 1 if max_products < 5 else 5
+        default_top_n = min(10, max_products)
+        top_n = st.sidebar.slider(
+            "Top N products",
+            min_value=slider_min,
+            max_value=max_products,
+            value=max(default_top_n, slider_min)
+        )
 
     # ---------- KPIs ----------
     col1, col2, col3, col4 = st.columns(4)
@@ -428,24 +464,13 @@ with dashboard_tab:
         else:
             st.metric("Average Risk Score", "N/A")
 
+    if filtered_df.empty:
+        st.info("No products match the selected filters.")
+
     # ---------- Main table ----------
     st.subheader("Final Recommendations")
 
-    display_cols = [
-        col for col in [
-            "CategoryName",
-            "ProductName",
-            "base_reorder_qty",
-            "social_trend_score",
-            "risk_score",
-            "risk_level",
-            "probability_up",
-            "fusion_adjustment",
-            "final_recommended_qty",
-            "risk_drivers",
-            "topic_keyword_text",
-        ] if col in filtered_df.columns
-    ]
+    display_cols = [col for col in FINAL_RECOMMENDATION_COLUMNS if col in filtered_df.columns]
 
     table_df = filtered_df[display_cols].reset_index(drop=True)
     table_df.index = table_df.index + 1
@@ -472,16 +497,7 @@ with dashboard_tab:
     if "final_recommended_qty" in top_df.columns:
         top_df = top_df.sort_values("final_recommended_qty", ascending=False).head(top_n)
 
-    top_display_cols = [
-        col for col in [
-            "CategoryName",
-            "ProductName",
-            "base_reorder_qty",
-            "final_recommended_qty",
-            "risk_level",
-            "social_trend_score",
-        ] if col in top_df.columns
-    ]
+    top_display_cols = [col for col in TOP_RECOMMENDATION_COLUMNS if col in top_df.columns]
 
     top_df = top_df[top_display_cols].reset_index(drop=True)
     top_df.index = top_df.index + 1
@@ -588,9 +604,7 @@ with dashboard_tab:
     # ---------- Feedback Section ----------
     st.subheader("Feedback Collection")
 
-    required_feedback_cols = ["ProductName", "final_recommended_qty"]
-
-    if all(col in filtered_df.columns for col in required_feedback_cols) and not filtered_df.empty:
+    if all(col in filtered_df.columns for col in FEEDBACK_REQUIRED_COLUMNS) and not filtered_df.empty:
 
         feedback_options_df = filtered_df.copy()
 
@@ -677,7 +691,7 @@ with sub1_tab:
     st.caption("Select a product or category and view the forecasting output generated by Subsystem 1.")
 
     if sub1_df.empty:
-        st.warning("Subsystem 1 output file not found. Update the candidate file paths in the dashboard if your file name is different.")
+        st.warning("Subsystem 1 output file not found.")
     else:
         sub1_labels = build_selection_labels(sub1_df)
         selected_sub1 = st.selectbox(
@@ -719,7 +733,7 @@ with sub2_tab:
     st.caption("Select a product or category and view the social trend output generated by Subsystem 2.")
 
     if sub2_df.empty:
-        st.warning("Subsystem 2 output file not found. Update the candidate file paths in the dashboard if your file name is different.")
+        st.warning("Subsystem 2 output file not found.")
     else:
         sub2_labels = build_selection_labels(sub2_df)
         selected_sub2 = st.selectbox(
@@ -757,7 +771,7 @@ with sub3_tab:
     st.caption("Select a product or category and view the risk scoring output generated by Subsystem 3.")
 
     if sub3_df.empty:
-        st.warning("Subsystem 3 output file not found. Update the candidate file paths in the dashboard if your file name is different.")
+        st.warning("Subsystem 3 output file not found.")
     else:
         sub3_labels = build_selection_labels(sub3_df)
         selected_sub3 = st.selectbox(
@@ -793,16 +807,16 @@ with sub4_tab:
     st.subheader("Subsystem 4 Interactive Testing")
     st.caption("Select a product or category and view the fused final recommendation generated by Subsystem 4.")
 
-    if df.empty:
+    if final_df.empty:
         st.warning("Subsystem 4 output file not found.")
     else:
-        sub4_labels = build_selection_labels(df)
+        sub4_labels = build_selection_labels(final_df)
         selected_sub4 = st.selectbox(
             "Choose a Subsystem 4 input",
             sub4_labels,
             key="sub4_selector",
         )
-        sub4_row = get_selected_row(df, selected_sub4)
+        sub4_row = get_selected_row(final_df, selected_sub4)
 
         render_prediction_table(
             sub4_row,
@@ -823,7 +837,7 @@ with sub4_tab:
         )
 
         st.markdown("### Subsystem 4 Raw Output Preview")
-        preview_df = df.reset_index(drop=True).copy()
+        preview_df = final_df.reset_index(drop=True).copy()
         preview_df.index = preview_df.index + 1
         st.dataframe(
             preview_df,
