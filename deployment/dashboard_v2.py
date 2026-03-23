@@ -9,6 +9,8 @@ import numpy as np
 import re
 from typing import Any, Optional
 
+from sentence_transformers import SentenceTransformer
+
 try:
     from sentence_transformers import SentenceTransformer
 except ImportError:
@@ -162,6 +164,10 @@ def clean_social_text(text: str) -> str:
     return text
 
 
+def normalize_keyword_text(text: str) -> str:
+    return clean_social_text(text)
+
+
 def cosine_similarity_score(a: np.ndarray, b: np.ndarray) -> float:
     denom = np.linalg.norm(a) * np.linalg.norm(b)
     if denom == 0:
@@ -220,14 +226,37 @@ def run_sub2_live_demo(user_text: str) -> dict | None:
     topic_row = topic_row_df.iloc[0]
     topic_keyword_text = topic_row.get("topic_keyword_text", "N/A")
     trend_score = topic_row.get("trend_score", np.nan)
-    is_trending = topic_row.get("is_trending", 0)
+    topic_is_trending = int(pd.to_numeric(topic_row.get("is_trending", 0), errors="coerce") or 0)
 
     matched_category = "N/A"
     matched_category_score = np.nan
+    category_is_trending = 0
     if not category_trends_df.empty and "topic_keyword_text" in category_trends_df.columns:
-        category_match_df = category_trends_df[
-            category_trends_df["topic_keyword_text"].astype(str) == str(topic_keyword_text)
-        ].copy()
+        category_match_df = pd.DataFrame()
+        normalized_topic_keyword = normalize_keyword_text(topic_keyword_text)
+
+        category_trends_copy = category_trends_df.copy()
+        category_trends_copy["topic_keyword_text_normalized"] = (
+            category_trends_copy["topic_keyword_text"].astype(str).apply(normalize_keyword_text)
+        )
+
+        if normalized_topic_keyword:
+            category_match_df = category_trends_copy[
+                category_trends_copy["topic_keyword_text_normalized"] == normalized_topic_keyword
+            ].copy()
+
+        # Fallback: choose the category row with the most keyword overlap.
+        if category_match_df.empty:
+            topic_tokens = set(normalized_topic_keyword.split())
+            if topic_tokens:
+                category_trends_copy["_keyword_overlap"] = category_trends_copy[
+                    "topic_keyword_text_normalized"
+                ].apply(lambda value: len(topic_tokens.intersection(set(str(value).split()))))
+
+                category_match_df = category_trends_copy[
+                    category_trends_copy["_keyword_overlap"] > 0
+                ].copy()
+
         if not category_match_df.empty:
             if "social_trend_score" in category_match_df.columns:
                 category_match_df["social_trend_score"] = pd.to_numeric(
@@ -239,6 +268,12 @@ def run_sub2_live_demo(user_text: str) -> dict | None:
             best_category_row = category_match_df.iloc[0]
             matched_category = best_category_row.get("CategoryName", "N/A")
             matched_category_score = best_category_row.get("social_trend_score", np.nan)
+            if "social_is_trending" in best_category_row.index:
+                category_is_trending = int(
+                    pd.to_numeric(best_category_row.get("social_is_trending", 0), errors="coerce") or 0
+                )
+            elif pd.notna(matched_category_score):
+                category_is_trending = int(float(matched_category_score) > 0)
 
     return {
         "input_text": user_text,
@@ -246,7 +281,8 @@ def run_sub2_live_demo(user_text: str) -> dict | None:
         "predicted_topic_id": predicted_topic_id,
         "topic_keyword_text": topic_keyword_text,
         "trend_score": trend_score,
-        "is_trending": int(is_trending),
+        "topic_is_trending": topic_is_trending,
+        "is_trending": category_is_trending,
         "matched_category": matched_category,
         "matched_category_social_trend_score": matched_category_score,
         "similarity_score": similarity_score,
@@ -561,7 +597,8 @@ def render_sub2_live_prediction() -> None:
             {"Field": "Matched Category", "Value": prediction["matched_category"]},
             {"Field": "Topic Trend Score", "Value": round(float(prediction["trend_score"]), 4) if pd.notna(prediction["trend_score"]) else "N/A"},
             {"Field": "Category Social Trend Score", "Value": round(float(prediction["matched_category_social_trend_score"]), 4) if pd.notna(prediction["matched_category_social_trend_score"]) else "N/A"},
-            {"Field": "Trending", "Value": "Yes" if int(prediction["is_trending"]) == 1 else "No"},
+            {"Field": "Topic Trending", "Value": "Yes" if int(prediction.get("topic_is_trending", 0)) == 1 else "No"},
+            {"Field": "Category Trending", "Value": "Yes" if int(prediction["is_trending"]) == 1 else "No"},
             {"Field": "Similarity Score", "Value": round(float(prediction["similarity_score"]), 4)},
         ])
 
