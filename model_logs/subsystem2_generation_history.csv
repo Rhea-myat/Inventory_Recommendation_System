@@ -2,3 +2,7 @@ timestamp,model_version,embedding_model,input_rows,num_topics_found,num_noise_po
 2026-03-23 15:22:41.355823,v2,all-MiniLM-L6-v2,0,54,0,54,33,loaded existing trend signals
 2026-03-23 15:23:00.747891,v2,all-MiniLM-L6-v2,0,54,0,54,33,loaded existing trend signals
 2026-03-23 15:23:51.963789,v2,all-MiniLM-L6-v2,0,54,0,54,33,loaded existing trend signals
+2026-03-26 20:27:03.643781,v2,all-MiniLM-L6-v2,5659,55,3899,54,33,topic clustering + trend scoring
+2026-03-26 20:29:14.406191,v2,all-MiniLM-L6-v2,5659,55,3899,54,33,topic clustering + trend scoring
+2026-03-27 20:46:23.267859,v2,all-MiniLM-L6-v2,5659,55,3899,54,33,topic clustering + trend scoring
+2026-03-27 20:49:11.371213,v2,all-MiniLM-L6-v2,5659,55,3899,54,33,topic clustering + trend scoring
