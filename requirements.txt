@@ -12,4 +12,4 @@ openpyxl==3.1.2
 python-dotenv==1.0.1
 sentence-transformers==2.7.0
 kagglehub==1.0.2
-hdbscan==0.8.44
+hdbscan==0.8.40
