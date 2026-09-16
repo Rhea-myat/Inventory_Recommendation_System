@@ -4,6 +4,11 @@ An end-to-end inventory decision-support application that combines demand foreca
 
 The project includes a Streamlit dashboard, reproducible Docker environment, saved model artifacts, subsystem testing views, recommendation export, and a feedback workflow for comparing system recommendations with final ordering decisions.
 
+## Live Demo 
+
+Try the deployed application on Streamlit Community Cloud: 
+[Launch the Inventory Recommendation System] (https://myat-rhea-inventory-recommender.streamlit.app/)
+
 ## Project Overview
 
 Inventory planning requires more than historical demand alone. Product demand may also be affected by emerging trends, stock availability, volatility, and operational issues.
