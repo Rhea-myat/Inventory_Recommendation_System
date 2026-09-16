@@ -6,8 +6,7 @@ The project includes a Streamlit dashboard, reproducible Docker environment, sav
 
 ## Live Demo 
 
-Try the deployed application on Streamlit Community Cloud: 
-[!Launch the Inventory Recommendation System] (https://myat-rhea-inventory-recommender.streamlit.app/)
+Try the deployed application on Streamlit Community Cloud: [Launch the Inventory Recommendation System](https://myat-rhea-inventory-recommender.streamlit.app/)
 
 ## Project Overview
 
